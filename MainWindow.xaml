@@ -1,0 +1,56 @@
+﻿<Window x:Class="BouyomichanDictionaryGenerator.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BouyomichanDictionaryGenerator"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="640" ResizeMode="NoResize"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="0*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock x:Name="textBlock" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="20,21,0,0" Height="16" Width="200"><Run Text="棒読みちゃんのフォルダを選択"/><Run Text="してください。"/></TextBlock>
+        <Button x:Name="ExploreBouyomiPathButton" Content="フォルダ選択" HorizontalAlignment="Left" Margin="20,42,0,0" VerticalAlignment="Top" Width="100" Height="26" Click="ExploreBouyomiPathButton_Click"/>
+        <TextBox x:Name="BouyomiPathTextBox" Height="26" Margin="132,42,1,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" IsEnabled="False"/>
+        <ListView x:Name="listView" HorizontalAlignment="Left" Height="262" Margin="20,94,0,0" VerticalAlignment="Top" Width="592" IsSynchronizedWithCurrentItem="False">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="再生">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button x:Name="PlaySoundButton" Background="#00000000" BorderBrush="White" Content="Play" Click="PlaySoundButton_Click"/>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=priority}">
+                        <GridViewColumnHeader Content="優先度" Tag="priority" />
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=soundName}">
+                        <GridViewColumnHeader Content="ファイル名" Tag="soundName" />
+                    </GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=searchLetter}">
+                        <GridViewColumnHeader Content="探索文字列" Tag="searchLetter" />
+                    </GridViewColumn>
+                    <GridViewColumn Header="再生終了を待つ">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding isSoundW}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="英単語">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <CheckBox HorizontalAlignment="Center" IsChecked="{Binding isEnglishWord}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock x:Name="textBlock_Copy" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Margin="20,73,0,0" Height="16" Width="237"><Run Text="設定"/><Run Text="を"/><Run Text="行ってください。"/></TextBlock>
+    </Grid>
+</Window>
